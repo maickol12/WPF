@@ -1,0 +1,81 @@
+﻿<Window x:Class="login.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:login"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="700"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="Transparent" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown">
+            <Grid>
+                <materialDesign:ColorZone Mode="PrimaryDark">
+                    <StackPanel HorizontalAlignment="Right">
+                        <Button Width="30" Height="30" materialDesign:ShadowAssist.ShadowDepth="Depth3" Padding="0" Click="btn_close_window" >
+                            <materialDesign:PackIcon Kind="WindowClose"></materialDesign:PackIcon>
+                        </Button>
+                    </StackPanel>
+                </materialDesign:ColorZone>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <materialDesign:ColorZone Mode="PrimaryMid">
+                <TextBlock Text="Benvenidos" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="30 50 0 10">
+                    
+                </TextBlock>
+            </materialDesign:ColorZone>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <StackPanel Orientation="Vertical" Margin="40 20 0 0">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Account" Foreground="{Binding ElementName=txtUsuario,Path=BorderBrush}" VerticalAlignment="Bottom" Margin="0 4"></materialDesign:PackIcon>
+                    <TextBox x:Name="txtUsuario" Width="700" materialDesign:HintAssist.Hint="Usuario" materialDesign:HintAssist.IsFloating="True"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 40 0 0">
+                    <materialDesign:PackIcon Kind="Key" Foreground="{Binding ElementName=txtUsuario,Path=BorderBrush}" VerticalAlignment="Bottom" Margin="0 4"></materialDesign:PackIcon>
+                    <PasswordBox x:Name="txtContrasenia" Width="700" materialDesign:HintAssist.Hint="Contraseña" materialDesign:HintAssist.IsFloating="True"></PasswordBox>
+                </StackPanel>
+                <CheckBox Content="Recordar contraseña" Margin="0 30 0 0"></CheckBox>
+                <Button 
+                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" CommandTarget="{Binding ElementName=dialogo}"
+                    Style="{DynamicResource MaterialDesignRaisedAccentButton}" Content="Inicial" Width="80" HorizontalAlignment="Right" Margin="0 20 70 0"></Button>
+                <materialDesign:Card Margin="0 10 10 10" Padding="15" materialDesign:ShadowAssist.ShadowDepth="Depth4">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>
+                            <Hyperlink Foreground="Gray" Style="{StaticResource MaterialDesignSubheadingHyperlink}">
+                                ¿Olvidaste tu contraseña?
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock Margin="70 0 0 0">
+                            <Hyperlink Foreground="Gray" Style="{StaticResource MaterialDesignSubheadingHyperlink}">
+                                Registrarse
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+                </materialDesign:Card>
+            </StackPanel>
+        </Grid>
+
+        <materialDesign:DialogHost IsOpen="False" x:Name="dialogo" Grid.RowSpan="3">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel Margin="15">
+                    <TextBlock Text="Iniciaste correctamente"></TextBlock>
+                    <Button 
+                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" CommandTarget="{Binding ElementName=dialogo}"
+                        Style="{DynamicResource MaterialDesignToolButton}" Content="Aceptar" Margin="0 10 0 0"/>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+    </Grid>
+</Window>
